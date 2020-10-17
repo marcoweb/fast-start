@@ -10,7 +10,7 @@ class Application {
         $conf_def = (file_exists($path_def)) ? include($path_def) : [];
         $path_app = $this->getApplicationPath().'/config/'.$section.'.config.php';
         $conf_app = (file_exists($path_app)) ? include($path_app) : [];
-        $this->configurations[$section] = array_merge($conf_def, $conf_app);
+        $this->configurations[$section] = array_merge_recursive($conf_def, $conf_app);
         return $this->configurations[$section];
     }
 
