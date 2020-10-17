@@ -7,10 +7,15 @@ class Application {
 
     public function getConfiguration($section) {
         $path_def = $this->getFrameworkPath().'/config/'.$section.'.config.php';
-        $conf_def = (file_exists($path_def)) ? include($path_def) : [];
+        // $conf_def = (file_exists($path_def)) ? include($path_def) : [];
         $path_app = $this->getApplicationPath().'/config/'.$section.'.config.php';
-        $conf_app = (file_exists($path_app)) ? include($path_app) : [];
-        $this->configurations[$section] = array_merge_recursive($conf_def, $conf_app);
+        // $conf_app = (file_exists($path_app)) ? include($path_app) : [];
+        // $this->configurations[$section] = array_merge_recursive($conf_def, $conf_app);
+        if(file_exists($path_app)) {
+            $this->configurations[$section] = include($path_app);
+        } else if (file_exists($path_def)) {
+            $this->configurations[$section] = include($path_def);
+        }
         return $this->configurations[$section];
     }
 
