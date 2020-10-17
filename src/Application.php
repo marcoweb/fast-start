@@ -6,7 +6,7 @@ class Application {
     private $applicationPath = null;
 
     public function getFrameworkPath() {
-        return __DIR__;
+        return realpath(__DIR__.'../');
     }
 
     public function getApplicationPath() {
