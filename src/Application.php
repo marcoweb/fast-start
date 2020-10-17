@@ -2,14 +2,15 @@
 namespace FastStart;
 
 class Application {
-    private $frameworkPath = null;
-    private $applicationPath = null;
-
     public function getFrameworkPath() {
         return realpath(__DIR__.'/../');
     }
 
     public function getApplicationPath() {
-        return $_SERVER['DOCUMENT_ROOT'];
+        if(file_exists('./composer.json')) {
+            return realpath($_SERVER['DOCUMENT_ROOT']);
+        } else {
+            return realpath($_SERVER['DOCUMENT_ROOT'].'/../');
+        }
     }
 }
